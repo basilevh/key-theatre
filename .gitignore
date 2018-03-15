@@ -1,2 +1,3 @@
-﻿bin/
-obj/
+﻿# Exclude folders
+bin/*
+obj/*

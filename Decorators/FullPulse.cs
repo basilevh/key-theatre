@@ -9,7 +9,7 @@ namespace KeyDecorator.Decorators
 {
     /// <summary>
     /// Decorator that continuously and independently fades each key between two colours.
-    /// Does not require keylogger.
+    /// Does not require a keylogger.
     /// </summary>
     public class FullPulse : Decorator
     {
@@ -18,23 +18,23 @@ namespace KeyDecorator.Decorators
         {
             foreach (MyKey key in Enum.GetValues(typeof(MyKey)))
             {
-                Color clr1 = ColorUtil.GetFromHSB(rnd.Next(360), sat, bri);
-                Color clr2 = ColorUtil.GetFromHSB(rnd.Next(360), sat, bri);
+                Color clr1 = ColorUtil.GetFromHSB(random.Next(360), sat, bri);
+                Color clr2 = ColorUtil.GetFromHSB(random.Next(360), sat, bri);
                 // Color clr2 = clr1.WithHue(h => h + 90f);
 
                 ledCont.PulseKey(key, clr1, clr2, fadeMs, true);
             }
         }
 
+        // No keylogger is active, so these methods are never called
         protected override void OnKeyDown(MyKey key) { }
-
         protected override void OnKeyUp(MyKey key) { }
 
         private long totalDelta = 0;
 
         protected override void Tick(long totalMs, long deltaMs)
         {
-            // TODO why necessary
+            // TODO why necessary?
             totalDelta += deltaMs;
             if (totalDelta >= 250)
             {

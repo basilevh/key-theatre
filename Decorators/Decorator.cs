@@ -10,14 +10,14 @@ using System.Threading;
 namespace KeyDecorator.Decorators
 {
     /// <summary>
-    /// Abstract key decorator class. Implementations operate the LED controller, using a keylogger if necessary.
+    /// Abstract key decorator class. Implementations operate the LED controller, using a keylogger as input if desired.
     /// </summary>
     public abstract class Decorator
     {
         /// <summary>
         /// Pseudo-random generator for convenience.
         /// </summary>
-        protected readonly Random rnd = new Random();
+        protected readonly Random random = new Random();
         
         /// <param name="intervalMs">Tick interval in milliseconds.</param>
         /// <param name="needsKeyLog">Decides whether to enable keylogging. If false, the keylogger object is left to null.</param>
@@ -95,7 +95,7 @@ namespace KeyDecorator.Decorators
 
                 Tick(curTimeMs, curTimeMs - lastTimeMs);
 
-                Thread.Sleep(intervalMs); // Tick is assumed to use negligible time
+                Thread.Sleep(intervalMs); // Tick is assumed to take a negligible time
                 if (toStop)
                     break;
 

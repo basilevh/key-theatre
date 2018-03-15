@@ -32,7 +32,7 @@ namespace KeyDecorator.Decorators
         {
             // Get random fully saturated and bright colour
             // Color clr = ColorUtil.GetRandom().WithSaturation(1f).WithBrightness(1f);
-            float hue = rnd.Next(360);
+            float hue = random.Next(360);
             Color clr = ColorUtil.GetFromHSB(hue, 1f, 1f);
             var keyPos = KeyboardInfo.GetPositions(key);
 
@@ -122,7 +122,7 @@ namespace KeyDecorator.Decorators
                                 MyKey leftKey = KeyboardInfo.KeyMatrix[y, leftX];
                                 if (leftKey != 0)
                                 {
-                                    Color leftClr = clr.WithHue(h => h + rnd.Next(-30, 31));
+                                    Color leftClr = clr.WithHue(h => h + random.Next(-30, 31));
                                     ledCont.LitKey(leftKey, leftClr,
                                         new Envelope(delayC, fadeInC, stayC, fadeOutC));
                                 }
@@ -132,7 +132,7 @@ namespace KeyDecorator.Decorators
                                 MyKey rightKey = KeyboardInfo.KeyMatrix[y, rightX];
                                 if (rightKey != 0)
                                 {
-                                    Color rightClr = clr.WithHue(h => h + rnd.Next(-30, 31));
+                                    Color rightClr = clr.WithHue(h => h + random.Next(-30, 31));
                                     ledCont.LitKey(rightKey, rightClr,
                                         new Envelope(delayC, fadeInC, stayC, fadeOutC));
                                 }
@@ -147,7 +147,7 @@ namespace KeyDecorator.Decorators
                                 MyKey upKey = KeyboardInfo.KeyMatrix[upY, x];
                                 if (upKey != 0)
                                 {
-                                    Color upClr = clr.WithHue(h => h + rnd.Next(-30, 31));
+                                    Color upClr = clr.WithHue(h => h + random.Next(-30, 31));
                                     ledCont.LitKey(upKey, upClr,
                                         new Envelope(delayC, fadeInC, stayC, fadeOutC));
                                 }
@@ -157,7 +157,7 @@ namespace KeyDecorator.Decorators
                                 MyKey downKey = KeyboardInfo.KeyMatrix[downY, x];
                                 if (downKey != 0)
                                 {
-                                    Color downClr = clr.WithHue(h => h + rnd.Next(-30, 31));
+                                    Color downClr = clr.WithHue(h => h + random.Next(-30, 31));
                                     ledCont.LitKey(downKey, downClr,
                                         new Envelope(delayC, fadeInC, stayC, fadeOutC));
                                 }

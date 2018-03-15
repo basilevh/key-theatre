@@ -3,17 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using KeyDecorator.Decorators;
 
@@ -27,9 +18,17 @@ namespace KeyDecorator
         public MainWindow()
         {
             InitializeComponent();
+
+            // Load settings
+            this.backClr = Properties.Settings.Default.BackColor;
+            updateBackClrBtn();
+            var match = myGrid.Children.OfType<System.Windows.Controls.RadioButton>()
+                .FirstOrDefault(r => (string)r.Content == Properties.Settings.Default.Decorator);
+            if (match != null)
+                match.IsChecked = true;
             this.loadingCtrls = false;
 
-            // Auto-init
+            // Auto-initialize
             init();
             update();
         }
@@ -57,6 +56,10 @@ namespace KeyDecorator
             // Update controls
             btnInit.IsEnabled = false;
             btnClear.IsEnabled = true;
+
+            // Store settings
+            Properties.Settings.Default.BackColor = backClr;
+            Properties.Settings.Default.Save();
         }
 
         private void clear()
@@ -117,14 +120,19 @@ namespace KeyDecorator
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            var cd = new ColorDialog();
+            var cd = new System.Windows.Forms.ColorDialog();
             if (cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.backClr = cd.Color;
-                btnBack.Background = new SolidColorBrush(
-                    Color.FromArgb(255, backClr.R, backClr.G, backClr.B));
+                updateBackClrBtn();
                 update();
             }
+        }
+
+        private void updateBackClrBtn()
+        {
+            btnBack.Background = new SolidColorBrush(
+                Color.FromArgb(255, backClr.R, backClr.G, backClr.B));
         }
 
         private void radPress_Checked(object sender, RoutedEventArgs e)

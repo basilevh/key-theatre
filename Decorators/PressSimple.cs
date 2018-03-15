@@ -20,7 +20,7 @@ namespace KeyDecorator.Decorators
         protected override void OnKeyDown(MyKey key)
         {
             // Get random fully saturated and bright colour
-            Color clr = ColorUtil.GetFromHSB(rnd.Next(360), 1f, 1f);
+            Color clr = ColorUtil.GetFromHSB(random.Next(360), 1f, 1f);
 
             // Lit pressed key
             const int fadeIn = 100;

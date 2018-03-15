@@ -15,14 +15,24 @@ namespace KeyDecorator
     {
         private readonly static Random rnd = new Random();
 
-        private static byte limit(int value)
-            => (value < 0 ? (byte)0 : value >= 256 ? (byte)255 : (byte)value);
+        private static byte saturate(int value)
+        {
+            return (value < 0 ? (byte)0 : value >= 256 ? (byte)255 : (byte)value);
+        }
 
-        // hue: 0-360, saturation: 0-1, brightness: 0-1
-        private static void HsbToRgb(float hue, float sat, float bri,
+        /// <summary>
+        /// Converts an HSB representation of a colour to its corresponding RGB representation.
+        /// </summary>
+        /// <param name="hue">Input hue value (0-360)</param>
+        /// <param name="sat">Input saturation value (0-1)</param>
+        /// <param name="bri">Input brightness value (0-1)</param>
+        /// <param name="red">Output red value (0-255)</param>
+        /// <param name="green">Output green value (0-255)</param>
+        /// <param name="blue">Output blue value (0-255)</param>
+        public static void HsbToRgb(float hue, float sat, float bri,
             out int red, out int green, out int blue)
         {
-            float hf = ((hue + 360f) % 360f) / 60f; // [0,6)
+            float hf = (((hue % 360f) + 360f) % 360f) / 60f; // in [0,6)
             float chroma = sat * bri;
             float sloped = chroma * (1f - Math.Abs(hf % 2f - 1f));
 
@@ -41,20 +51,29 @@ namespace KeyDecorator
             { r = sloped; g = 0f; b = chroma; }
             else if (5f <= hf && hf <= 6f)
             { r = chroma; g = 0f; b = sloped; }
-            else // hue undefined
+            else // hue out of range
             { r = 0f; g = 0f; b = 0f; }
 
             // Compensate for brightness and return converted values
             float add = bri - chroma;
-            red = (int)(256 * (r + add));
-            green = (int)(256 * (g + add));
-            blue = (int)(256 * (b + add));
+            red = saturate((int)(256 * (r + add)));
+            green = saturate((int)(256 * (g + add)));
+            blue = saturate((int)(256 * (b + add)));
         }
 
+        /// <summary>
+        /// Converts an RGB representation of a colour to its corresponding HSB representation.
+        /// </summary>
+        /// <param name="red">Input red value (0-255)</param>
+        /// <param name="green">Input green value (0-255)</param>
+        /// <param name="blue">Input blue value (0-255)</param>
+        /// <param name="hue">Output hue value (0-360)</param>
+        /// <param name="sat">Output saturation value (0-1)</param>
+        /// <param name="bri">Output brightness value (0-1)</param>
         public static void RgbToHsb(int red, int green, int blue,
             out float hue, out float sat, out float bri)
         {
-            // Color's conversion methods are HSL, not HSB/HSV!
+            // Color's built-in conversion methods are actually HSL, not HSB/HSV!
             float r = red / 256f;
             float g = green / 256f;
             float b = blue / 256f;
@@ -85,9 +104,17 @@ namespace KeyDecorator
             hue = (hue + 6f) % 6f * 60f;
         }
 
+        /// <summary>
+        /// Creates a Color object starting from its RGB representation.
+        /// </summary>
         public static Color GetFromRGB(int red, int green, int blue)
-            => Color.FromArgb(limit(red), limit(green), limit(blue));
+        {
+            return Color.FromArgb(saturate(red), saturate(green), saturate(blue));
+        }
 
+        /// <summary>
+        /// Creates a Color object starting from its HSB representation.
+        /// </summary>
         public static Color GetFromHSB(float hue, float sat, float bri)
         {
             int red, green, blue;
@@ -95,48 +122,86 @@ namespace KeyDecorator
             return GetFromRGB(red, green, blue);
         }
 
+        /// <summary>
+        /// Creates a Color object with a uniformly random RGB representation.
+        /// </summary>
         public static Color GetRandom()
-            => Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+        {
+            return Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+        }
 
-        // Fixed RGB assignment
+        /// <summary>
+        /// Creates a Color object with the same properties, but with a new fixed red value.
+        /// </summary>
         public static Color WithRed(this Color clr, int red)
-            => Color.FromArgb(limit(red), clr.G, clr.B);
+        {
+            return Color.FromArgb(saturate(red), clr.G, clr.B);
+        }
 
+        /// <summary>
+        /// Creates a Color object with the same properties, but with a new fixed green value.
+        /// </summary>
         public static Color WithGreen(this Color clr, int green)
-            => Color.FromArgb(clr.R, limit(green), clr.B);
+        {
+            return Color.FromArgb(clr.R, saturate(green), clr.B);
+        }
 
+        /// <summary>
+        /// Creates a Color object with the same properties, but with a new fixed blue value.
+        /// </summary>
         public static Color WithBlue(this Color clr, int blue)
-            => Color.FromArgb(clr.R, clr.G, limit(blue));
+        {
+            return Color.FromArgb(clr.R, clr.G, saturate(blue));
+        }
 
-        // Dependant RGB assignment
+        /// <summary>
+        /// Creates a Color object with the same properties, but with a new red value that is a given function of the old value.
+        /// </summary>
         public static Color WithRed(this Color clr, Func<int, int> redProj)
-            => Color.FromArgb(limit(redProj(clr.R)), clr.G, clr.B);
+        {
+            return Color.FromArgb(saturate(redProj(clr.R)), clr.G, clr.B);
+        }
 
+        /// <summary>
+        /// Creates a Color object with the same properties, but with a new green value that is a given function of the old value.
+        /// </summary>
         public static Color WithGreen(this Color clr, Func<int, int> greenProj)
-            => Color.FromArgb(clr.R, limit(greenProj(clr.G)), clr.B);
+        {
+            return Color.FromArgb(clr.R, saturate(greenProj(clr.G)), clr.B);
+        }
 
+        /// <summary>
+        /// Creates a Color object with the same properties, but with a new blue value that is a given function of the old value.
+        /// </summary>
         public static Color WithBlue(this Color clr, Func<int, int> blueProj)
-            => Color.FromArgb(clr.R, clr.G, limit(blueProj(clr.B)));
+        {
+            return Color.FromArgb(clr.R, clr.G, saturate(blueProj(clr.B)));
+        }
 
+        /// <summary>
+        /// Creates a Color object with an RGB representation that are given functions of the old values.
+        /// </summary>
         public static Color WithRGB(this Color clr, Func<int, int> redProj, Func<int, int> greenProj, Func<int, int> blueProj)
-            => Color.FromArgb(limit(redProj(clr.R)), limit(greenProj(clr.G)), limit(blueProj(clr.B)));
+        {
+            return Color.FromArgb(saturate(redProj(clr.R)), saturate(greenProj(clr.G)), saturate(blueProj(clr.B)));
+        }
 
         // Fixed HSB assignment
-        public static Color WithHue(this Color clr, float hue) // 0-360
+        public static Color WithHue(this Color clr, float hue)
         {
             float oldHue, oldSat, oldBri;
             RgbToHsb(clr.R, clr.G, clr.B, out oldHue, out oldSat, out oldBri);
             return GetFromHSB(hue, oldSat, oldBri);
         }
 
-        public static Color WithSaturation(this Color clr, float sat) // 0-360
+        public static Color WithSaturation(this Color clr, float sat)
         {
             float oldHue, oldSat, oldBri;
             RgbToHsb(clr.R, clr.G, clr.B, out oldHue, out oldSat, out oldBri);
             return GetFromHSB(oldHue, sat, oldBri);
         }
 
-        public static Color WithBrightness(this Color clr, float bri) // 0-360
+        public static Color WithBrightness(this Color clr, float bri)
         {
             float oldHue, oldSat, oldBri;
             RgbToHsb(clr.R, clr.G, clr.B, out oldHue, out oldSat, out oldBri);
@@ -144,21 +209,21 @@ namespace KeyDecorator
         }
 
         // Dependant HSB assignment
-        public static Color WithHue(this Color clr, Func<float, float> hueProj) // 0-360
+        public static Color WithHue(this Color clr, Func<float, float> hueProj)
         {
             float oldHue, oldSat, oldBri;
             RgbToHsb(clr.R, clr.G, clr.B, out oldHue, out oldSat, out oldBri);
             return GetFromHSB(hueProj(oldHue), oldSat, oldBri);
         }
 
-        public static Color WithSaturation(this Color clr, Func<float, float> satProj) // 0-1
+        public static Color WithSaturation(this Color clr, Func<float, float> satProj)
         {
             float oldHue, oldSat, oldBri;
             RgbToHsb(clr.R, clr.G, clr.B, out oldHue, out oldSat, out oldBri);
             return GetFromHSB(oldHue, satProj(oldSat), oldBri);
         }
 
-        public static Color WithBrightness(this Color clr, Func<float, float> briProj) // 0-1
+        public static Color WithBrightness(this Color clr, Func<float, float> briProj)
         {
             float oldHue, oldSat, oldBri;
             RgbToHsb(clr.R, clr.G, clr.B, out oldHue, out oldSat, out oldBri);

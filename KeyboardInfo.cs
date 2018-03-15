@@ -1,5 +1,5 @@
 ﻿// Started 04-11-2016, Basile Van Hoorick
-// Static class with my key positions
+// Static class with my key positions (FR layout)
 
 using System;
 using System.Collections.Generic;

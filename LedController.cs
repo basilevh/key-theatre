@@ -87,6 +87,7 @@ namespace KeyDecorator
             // Execute pending actions & remove
             List<DelayedAction> toRun;
             lock (pendingActions)
+                // TODO not thread-safe :(
                 toRun = pendingActions.Where(da => da.StartTimeMs <= curTimeMs)
                     .ToList();
             foreach (var da in toRun)
@@ -103,6 +104,7 @@ namespace KeyDecorator
         }
 
         // TODO return interpolated color while fading
+        // TODO add time argument for lookup into future
         public Color GetKeyColor(MyKey key) => keyColors[key];
 
         // Pulses key

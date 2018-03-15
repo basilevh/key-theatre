@@ -1,5 +1,5 @@
 ﻿// Started 04-11-2016, Basile Van Hoorick
-// Uses and interprets GetAsyncKeyState
+// Uses and interprets GetAsyncKeyState to provide real-time callbacks on key presses and releases
 
 using System;
 using System.Collections.Generic;
