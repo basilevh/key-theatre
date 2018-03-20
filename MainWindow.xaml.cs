@@ -93,7 +93,7 @@ namespace KeyDecorator
                 if (radPress.IsChecked == true)
                     this.decorator = new PressSimple(backClr);
                 else if (radPressPlus.IsChecked == true)
-                    this.decorator = new PressPlus(backClr, PressPlus.Mode.Circle);
+                    this.decorator = new PressPlus(backClr, PressPlus.Mode.Radial);
                 else
                     this.decorator = new FullPulse();
                 decorator.Start();
@@ -143,9 +143,15 @@ namespace KeyDecorator
         private void radPressPlus_Checked(object sender, RoutedEventArgs e)
         {
             update();
+            ucDecoPressPlus.Visibility = (radPressPlus.IsChecked == true ? Visibility.Visible : Visibility.Collapsed);
         }
 
         private void radFullPulse_Checked(object sender, RoutedEventArgs e)
+        {
+            update();
+        }
+
+        private void ucDecoPressPlus_ParameterChanged()
         {
             update();
         }

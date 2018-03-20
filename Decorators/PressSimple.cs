@@ -22,7 +22,7 @@ namespace KeyDecorator.Decorators
             // Get random fully saturated and bright colour
             Color clr = ColorUtil.GetFromHSB(random.Next(360), 1f, 1f);
 
-            // Lit pressed key
+            // Lit pressed key (no delay)
             const int fadeIn = 100;
             const int stay = 100;
             const int fadeOut = 3800;

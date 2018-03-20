@@ -21,8 +21,8 @@
         <RadioButton x:Name="radPress" Content="Key Press" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="True" Checked="radPress_Checked"/>
         <RadioButton x:Name="radPressPlus" Content="Key Press Plus" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="False" Checked="radPressPlus_Checked"/>
         <RadioButton x:Name="radFullPulse" Content="Full Pulse" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="False" Checked="radFullPulse_Checked"/>
-
-        <!--<TextBlock x:Name="tbBackClr" HorizontalAlignment="Left" Margin="10,120,0,0" TextWrapping="Wrap" Text="Background:" VerticalAlignment="Top"/>-->
+        
+        <local:ucPressPlus x:Name="ucDecoPressPlus" HorizontalAlignment="Stretch" Height="80" Margin="10,95,10,0" VerticalAlignment="Top" Width="497" ParameterChanged="ucDecoPressPlus_ParameterChanged"/>
 
     </Grid>
 </Window>

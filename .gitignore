@@ -1,3 +1,4 @@
 ﻿# Exclude folders
 bin/*
 obj/*
+/.vs/KeyDecorator/v15/Server/sqlite3

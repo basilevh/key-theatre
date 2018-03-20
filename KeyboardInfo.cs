@@ -1,5 +1,4 @@
 ﻿// Started 04-11-2016, Basile Van Hoorick
-// Static class with my key positions (FR layout)
 
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,9 @@ using System.Text;
 
 namespace KeyDecorator
 {
+    /// <summary>
+    /// Utility class with my key positions (FR layout)
+    /// </summary>
     public static class KeyboardInfo
     {
         // Constants
@@ -29,7 +31,9 @@ namespace KeyDecorator
         { MyKey.LEFT_CTRL, MyKey.LEFT_WIN, MyKey.LEFT_ALT, MyKey.SPACE,   MyKey.SPACE,    MyKey.SPACE,    MyKey.SPACE,    MyKey.SPACE,    MyKey.SPACE,    MyKey.SPACE,    MyKey.RIGHT_ALT,
           MyKey.RIGHT_WIN, MyKey.APP_SELECT, MyKey.RIGHT_CTRL, MyKey.RIGHT_CTRL, MyKey.ARROW_LEFT, MyKey.ARROW_DOWN, MyKey.ARROW_RIGHT, MyKey.NUM_ZERO, MyKey.NUM_ZERO, MyKey.NUM_PERIOD, MyKey.NUM_ENTER } };
 
-        // Key position dictionary (returns: set of x, y values)
+        // TODO more accurate key to coordinate mapping
+
+        // Key position dictionary. Input: key, output: set of (x, y) values
         private static readonly Dictionary<MyKey, ISet<Tuple<int, int>>> keyPosDict
             = new Dictionary<MyKey, ISet<Tuple<int, int>>>();
 

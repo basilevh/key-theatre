@@ -5,7 +5,7 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
 
-// modified for FRA as of 05-07-2016
+// modified for FR layout as of 05-07-2016
 public enum MyKey
 {
     ESC = 0x01,

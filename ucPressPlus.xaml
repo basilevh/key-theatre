@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="KeyDecorator.ucPressPlus"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KeyDecorator"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="220">
+    <Grid x:Name="grid">
+        <Label Content="Mode:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <RadioButton x:Name="radHorizontal" Content="Horizontal" HorizontalAlignment="Left" Margin="59,16,0,0" VerticalAlignment="Top" Foreground="White" IsChecked="True" Checked="radHorizontal_Checked"/>
+        <RadioButton x:Name="radRadial" Content="Radial" HorizontalAlignment="Left" Margin="138,16,0,0" VerticalAlignment="Top" Foreground="White" Checked="radRadial_Checked"/>
+        <Label Content="Max distance:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <xctk:IntegerUpDown x:Name="numDistance" HorizontalAlignment="Left" Margin="97,40,0,0" VerticalAlignment="Top" Width="60" Minimum="0" Maximum="21" Value="3" ValueChanged="numDistance_ValueChanged" />
+
+    </Grid>
+</UserControl>

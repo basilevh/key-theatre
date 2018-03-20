@@ -14,10 +14,12 @@ namespace KeyDecorator.Decorators
     {
         public enum Mode
         {
-            Horizontal, Circle
+            Horizontal, Radial
         }
 
-        /// <param name="dist">Horizontal: maximum projectile distance (0 for infinite), Circle: radius</param>
+        /// <param name="backClr">The default background color for unpressed keys.</param>
+        /// <param name="mode">The path of divergence from pressed keys.</param>
+        /// <param name="dist">If the mode is Horizontal: maximum projectile distance, if Radial: radius (0 for infinite)</param>
         public PressPlus(Color backClr, Mode mode = Mode.Horizontal, int dist = 3)
             : base(25, true, backClr)
         {
@@ -95,7 +97,7 @@ namespace KeyDecorator.Decorators
                     }
                     break;
 
-                case Mode.Circle:
+                case Mode.Radial:
                     // Lit pressed key
                     const int fadeInC = 150;
                     const int stayC = 400;
@@ -103,6 +105,8 @@ namespace KeyDecorator.Decorators
                     const int delayC = 50;
                     ledCont.ClearActions(key);
                     ledCont.LitKey(key, clr, new Envelope(0, fadeInC, stayC, fadeOutC));
+
+                    // TODO account for radius
 
                     {
                         var leftX = keyPos.Min(p => p.Item1) - 1;

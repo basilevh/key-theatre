@@ -1,5 +1,4 @@
 ﻿// Started 04-11-2016, Basile Van Hoorick
-// Level envelope containing delay, fade-in, stay, fade-out
 
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace KeyDecorator
 {
+    /// <summary>
+    /// Holds level envelope information: delay, fade-in, stay and fade-out times.
+    /// </summary>
     public class Envelope
     {
         public Envelope(int delayMs, int fadeInMs, int stayMs, int fadeOutMs)
