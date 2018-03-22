@@ -22,7 +22,7 @@
         <RadioButton x:Name="radPressPlus" Content="Key Press Plus" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="False" Checked="radPressPlus_Checked"/>
         <RadioButton x:Name="radFullPulse" Content="Full Pulse" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="False" Checked="radFullPulse_Checked"/>
         
-        <local:ucPressPlus x:Name="ucDecoPressPlus" HorizontalAlignment="Stretch" Height="80" Margin="10,95,10,0" VerticalAlignment="Top" Width="497" ParameterChanged="ucDecoPressPlus_ParameterChanged"/>
+        <local:ucPressPlus x:Name="ucDecoPressPlus" HorizontalAlignment="Stretch" Height="80" Margin="10,95,10,0" VerticalAlignment="Top" Width="497"/>
 
     </Grid>
 </Window>

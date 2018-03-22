@@ -47,6 +47,11 @@ namespace KeyDecorator
             }
         }
 
+        /// <summary>
+        /// Returns the selected path distance.
+        /// </summary>
+        public int Distance => numDistance.Value.Value;
+
         private void radHorizontal_Checked(object sender, RoutedEventArgs e)
         {
             ParameterChanged?.Invoke();

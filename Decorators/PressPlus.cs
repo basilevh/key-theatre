@@ -19,16 +19,16 @@ namespace KeyDecorator.Decorators
 
         /// <param name="backClr">The default background color for unpressed keys.</param>
         /// <param name="mode">The path of divergence from pressed keys.</param>
-        /// <param name="dist">If the mode is Horizontal: maximum projectile distance, if Radial: radius (0 for infinite)</param>
-        public PressPlus(Color backClr, Mode mode = Mode.Horizontal, int dist = 3)
+        /// <param name="distance">If the mode is Horizontal: maximum projectile distance, if Radial: radius (0 for infinite)</param>
+        public PressPlus(Color backClr, Mode mode = Mode.Horizontal, int distance = 3)
             : base(25, true, backClr)
         {
             this.mode = mode;
-            this.dist = dist;
+            this.distance = distance;
         }
 
         private readonly Mode mode;
-        private readonly int dist;
+        private readonly int distance;
 
         protected override void OnKeyDown(MyKey key)
         {
@@ -60,11 +60,11 @@ namespace KeyDecorator.Decorators
                         while (true)
                         {
                             i++;
-                            if (dist > 0)
+                            if (distance > 0)
                             {
-                                if (i > dist)
+                                if (i > distance)
                                     break;
-                                clr = clr.WithBrightness(b => b - 1f / (dist + 1));
+                                clr = clr.WithBrightness(b => b - 1f / (distance + 1));
                             }
                             delay += 50;
 

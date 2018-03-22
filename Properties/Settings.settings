@@ -8,5 +8,11 @@
     <Setting Name="Decorator" Type="System.String" Scope="User">
       <Value Profile="(Default)">Full Pulse</Value>
     </Setting>
+    <Setting Name="PressPlusMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Radial</Value>
+    </Setting>
+    <Setting Name="PressPlusDistance" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

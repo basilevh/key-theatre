@@ -20,17 +20,15 @@ namespace KeyDecorator
             InitializeComponent();
 
             // Load settings
-            this.backClr = Properties.Settings.Default.BackColor;
-            updateBackClrBtn();
-            var match = myGrid.Children.OfType<System.Windows.Controls.RadioButton>()
-                .FirstOrDefault(r => (string)r.Content == Properties.Settings.Default.Decorator);
-            if (match != null)
-                match.IsChecked = true;
+            loadSettings();
             this.loadingCtrls = false;
 
             // Auto-initialize
             init();
             update();
+
+            // Subscribe to user control events
+            ucDecoPressPlus.ParameterChanged += ucDecoPressPlus_ParameterChanged;
         }
 
         private bool loadingCtrls = true;
@@ -56,10 +54,6 @@ namespace KeyDecorator
             // Update controls
             btnInit.IsEnabled = false;
             btnClear.IsEnabled = true;
-
-            // Store settings
-            Properties.Settings.Default.BackColor = backClr;
-            Properties.Settings.Default.Save();
         }
 
         private void clear()
@@ -83,29 +77,69 @@ namespace KeyDecorator
 
         private void update()
         {
+            if (loadingCtrls)
+                return;
+
             // Stop decorator
             if (decorator != null && decorator.IsRunning)
                 decorator.Stop();
+            
+            // Start decorator
+            if (radPress.IsChecked == true)
+                this.decorator = new PressSimple(backClr);
+            else if (radPressPlus.IsChecked == true)
+                this.decorator = new PressPlus(backClr, ucDecoPressPlus.Mode, ucDecoPressPlus.Distance);
+            else
+                this.decorator = new FullPulse();
+            decorator.Start();
 
-            if (!loadingCtrls)
-            {
-                // Start decorator
-                if (radPress.IsChecked == true)
-                    this.decorator = new PressSimple(backClr);
-                else if (radPressPlus.IsChecked == true)
-                    this.decorator = new PressPlus(backClr, PressPlus.Mode.Radial);
-                else
-                    this.decorator = new FullPulse();
-                decorator.Start();
-            }
+            // Update control visibility
+            ucDecoPressPlus.Visibility = (radPressPlus.IsChecked == true ? Visibility.Visible : Visibility.Collapsed);
+
+            // Store settings
+            storeSettings();
         }
+
+        private void loadSettings()
+        {
+            // General
+            this.backClr = Properties.Settings.Default.BackColor;
+            updateBackClrBtn();
+            var match = myGrid.Children.OfType<System.Windows.Controls.RadioButton>()
+                .FirstOrDefault(r => (string)r.Content == Properties.Settings.Default.Decorator);
+            if (match != null)
+                match.IsChecked = true;
+
+            // Key Press Plus
+            match = ucDecoPressPlus.myGrid.Children.OfType<System.Windows.Controls.RadioButton>()
+                .FirstOrDefault(r => (string)r.Content == Properties.Settings.Default.PressPlusMode);
+            if (match != null)
+                match.IsChecked = true;
+            ucDecoPressPlus.numDistance.Value = Properties.Settings.Default.PressPlusDistance;
+        }
+
+        private void storeSettings()
+        {
+            // General
+            Properties.Settings.Default.BackColor = backClr;
+            var match = myGrid.Children.OfType<System.Windows.Controls.RadioButton>()
+                .FirstOrDefault(r => r.IsChecked == true);
+            if (match != null)
+                Properties.Settings.Default.Decorator = (string)match.Content;
+
+            // Key Press Plus
+            Properties.Settings.Default.PressPlusMode = ucDecoPressPlus.Mode.ToString();
+            Properties.Settings.Default.PressPlusDistance = ucDecoPressPlus.Distance;
+
+            Properties.Settings.Default.Save();
+        }
+
+        #region Controls
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             clear();
         }
-
-        #region Controls
 
         private void btnInit_Click(object sender, RoutedEventArgs e)
         {
@@ -143,7 +177,6 @@ namespace KeyDecorator
         private void radPressPlus_Checked(object sender, RoutedEventArgs e)
         {
             update();
-            ucDecoPressPlus.Visibility = (radPressPlus.IsChecked == true ? Visibility.Visible : Visibility.Collapsed);
         }
 
         private void radFullPulse_Checked(object sender, RoutedEventArgs e)

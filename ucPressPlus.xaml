@@ -7,7 +7,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="220">
-    <Grid x:Name="grid">
+    <Grid x:Name="myGrid">
         <Label Content="Mode:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White"/>
         <RadioButton x:Name="radHorizontal" Content="Horizontal" HorizontalAlignment="Left" Margin="59,16,0,0" VerticalAlignment="Top" Foreground="White" IsChecked="True" Checked="radHorizontal_Checked"/>
         <RadioButton x:Name="radRadial" Content="Radial" HorizontalAlignment="Left" Margin="138,16,0,0" VerticalAlignment="Top" Foreground="White" Checked="radRadial_Checked"/>
