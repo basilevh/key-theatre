@@ -4,8 +4,16 @@ obj/*
 .vs/*
 packages/*
 
-# Include release
-!bin/Release
-bin/Release/*
-!bin/Release/KeyDecorator.exe
-!bin/Release/LogitechLedEnginesWrapper.dll
+# Include release files
+!bin/x64
+!bin/x86
+bin/x64/*
+bin/x86/*
+!bin/x64/Release
+!bin/x86/Release
+bin/x64/Release/*
+bin/x86/Release/*
+!bin/x64/Release/KeyDecorator.exe
+!bin/x64/Release/LogitechLedEnginesWrapper.dll
+!bin/x86/Release/KeyDecorator.exe
+!bin/x86/Release/LogitechLedEnginesWrapper.dll
