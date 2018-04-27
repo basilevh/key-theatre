@@ -40,6 +40,7 @@ namespace KeyDecorator
         {
             // Init SDK
             LogitechGSDK.LogiLedInit();
+            LogitechGSDK.LogiLedSetTargetDevice(LogitechGSDK.LOGI_DEVICETYPE_PERKEY_RGB); // only G810, G910, ...
             LogitechGSDK.LogiLedSaveCurrentLighting();
 
             if (!sdkTitleAdded)
