@@ -1,4 +1,11 @@
 ﻿# Exclude folders
 bin/*
 obj/*
-/.vs/KeyDecorator/v15/Server/sqlite3
+.vs/*
+packages/*
+
+# Include release
+!bin/Release
+bin/Release/*
+!bin/Release/KeyDecorator.exe
+!bin/Release/LogitechLedEnginesWrapper.dll
