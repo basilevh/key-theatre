@@ -21,8 +21,9 @@
         <RadioButton x:Name="radPress" Content="Key Press" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="True" Checked="radPress_Checked"/>
         <RadioButton x:Name="radPressPlus" Content="Key Press Plus" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="False" Checked="radPressPlus_Checked"/>
         <RadioButton x:Name="radFullPulse" Content="Full Pulse" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="False" Checked="radFullPulse_Checked"/>
+        <RadioButton x:Name="radPartRain" Content="Outrun / Sunset" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" Background="White" Foreground="White" IsChecked="False" Checked="radPartRain_Checked"/>
         
-        <local:ucPressPlus x:Name="ucDecoPressPlus" HorizontalAlignment="Stretch" Height="80" Margin="10,95,10,0" VerticalAlignment="Top" Width="497"/>
+        <local:ucPressPlus x:Name="ucDecoPressPlus" HorizontalAlignment="Stretch" Height="80" Margin="10,135,10,0" VerticalAlignment="Top" Width="497"/>
 
     </Grid>
 </Window>

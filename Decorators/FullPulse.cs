@@ -34,12 +34,13 @@ namespace KeyDecorator.Decorators
 
         protected override void Tick(long totalMs, long deltaMs)
         {
-            // TODO why necessary?
             totalDelta += deltaMs;
             if (totalDelta >= 250)
             {
                 // Run once
                 totalDelta = long.MinValue;
+
+                // TODO: idk
             }
         }
     }

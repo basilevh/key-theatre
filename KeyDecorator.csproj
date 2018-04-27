@@ -109,6 +109,7 @@
     <Compile Include="ColorUtil.cs" />
     <Compile Include="Decorators\FullPulse.cs" />
     <Compile Include="Decorators\PressPlus.cs" />
+    <Compile Include="Decorators\PartialRainbow.cs" />
     <Compile Include="ucPressPlus.xaml.cs">
       <DependentUpon>ucPressPlus.xaml</DependentUpon>
     </Compile>

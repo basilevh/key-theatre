@@ -84,14 +84,16 @@ namespace KeyDecorator
             // Stop decorator
             if (decorator != null && decorator.IsRunning)
                 decorator.Stop();
-            
+
             // Start decorator
             if (radPress.IsChecked == true)
                 this.decorator = new PressSimple(backClr);
             else if (radPressPlus.IsChecked == true)
                 this.decorator = new PressPlus(backClr, ucDecoPressPlus.Mode, ucDecoPressPlus.Distance);
-            else
+            else if (radFullPulse.IsChecked == true)
                 this.decorator = new FullPulse();
+            else
+                this.decorator = new PartialRainbow(5f, 55f);
             decorator.Start();
 
             // Update control visibility
@@ -181,6 +183,11 @@ namespace KeyDecorator
         }
 
         private void radFullPulse_Checked(object sender, RoutedEventArgs e)
+        {
+            update();
+        }
+
+        private void radPartRain_Checked(object sender, RoutedEventArgs e)
         {
             update();
         }

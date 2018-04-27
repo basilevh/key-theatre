@@ -124,7 +124,7 @@ namespace KeyDecorator
             // TODO dictionary if infinite?
             keyColors[key] = clr2;
         }
-        
+
         /// <summary>
         /// Sets key color right now, with optional fading.
         /// </summary>
@@ -132,7 +132,7 @@ namespace KeyDecorator
         {
             if (fadeMs <= 0 || !keyColors.ContainsKey(key))
             {
-                // Now: set clr
+                // Now: set color
                 // TODO ugly hack:
                 /* The commented instruction gets ignored as long as an effect is
                  * running, so we force it using a "pulse" effect with only one
@@ -158,7 +158,7 @@ namespace KeyDecorator
             // Update dictionary
             keyColors[key] = clr;
         }
-        
+
         /// <summary>
         /// Changes key color to 'on', then to background.
         /// </summary>
@@ -168,7 +168,7 @@ namespace KeyDecorator
             LitKey(key, on, backClr, env);
             // LitKey(key, on, keyColors[key], env);
         }
-        
+
         /// <summary>
         /// Changes key color to 'on', then to 'off'.
         /// </summary>
@@ -187,6 +187,37 @@ namespace KeyDecorator
         public void ClearActions(MyKey key)
         {
             pendingActions.RemoveWhere(da => da.Key == key);
+        }
+
+        /// <summary>
+        /// Applies the given color array to the whole keyboard.
+        /// Note that this method overwrites all previous color settings,
+        /// and keys could be overwritten by a delayed action afterwards.
+        /// </summary>
+        /// <param name="bitmap">21 * 6 array of colors to paint on the keyboard</param>
+        public void SetBitmap(Color[,] bitmap)
+        {
+            byte[] convert = new byte[KeyboardInfo.BmpWidth * KeyboardInfo.BmpHeight * 4]; // 4 bytes per key (BGRA)
+            for (int i = 0; i < KeyboardInfo.BmpWidth; i++)
+                for (int j = 0; j < KeyboardInfo.BmpHeight; j++)
+                {
+                    convert[(i + j * KeyboardInfo.BmpWidth) * 4] = bitmap[i, j].B;
+                    convert[(i + j * KeyboardInfo.BmpWidth) * 4 + 1] = bitmap[i, j].G;
+                    convert[(i + j * KeyboardInfo.BmpWidth) * 4 + 2] = bitmap[i, j].R;
+                    convert[(i + j * KeyboardInfo.BmpWidth) * 4 + 3] = 255;
+                }
+
+            LogitechGSDK.LogiLedSetLightingFromBitmap(convert);
+        }
+
+        /// <summary>
+        /// Clears all the effects currently running.
+        /// This also means that the background color will not be enforced anymore,
+        /// until delayed actions might modify keys again.
+        /// </summary>
+        public void StopEffects()
+        {
+            LogitechGSDK.LogiLedStopEffects();
         }
 
         // Adds delayed action with specified delay (NOT absolute time)

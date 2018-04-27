@@ -115,6 +115,9 @@ namespace KeyDecorator
         /// <summary>
         /// Creates a Color object starting from its HSB representation.
         /// </summary>
+        /// <param name="hue">Hue value (0-360)</param>
+        /// <param name="sat">Saturation value (0-1)</param>
+        /// <param name="bri">Brightness value (0-1)</param>
         public static Color GetFromHSB(float hue, float sat, float bri)
         {
             int red, green, blue;

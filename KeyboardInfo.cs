@@ -13,8 +13,10 @@ namespace KeyDecorator
     public static class KeyboardInfo
     {
         // Constants
-        public const int HorizKeyCount = 22;
+        public const int HorizKeyCount = 22; // for my own matrix
         public const int VertKeyCount = 6;
+        public const int BmpWidth = 21; // for calls to bitmap
+        public const int BmpHeight = 6;
 
         // Qwerty matrix (access: y, x)
         public static readonly MyKey[,] KeyMatrix = new MyKey[,] {
