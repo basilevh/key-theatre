@@ -107,6 +107,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColorUtil.cs" />
+    <Compile Include="Controllers\MatrixController.cs" />
+    <Compile Include="Controllers\PerKeyController.cs" />
     <Compile Include="Decorators\FullPulse.cs" />
     <Compile Include="Decorators\PressPlus.cs" />
     <Compile Include="Decorators\PartialRainbow.cs" />
@@ -127,7 +129,7 @@
     <Compile Include="ILedEffect.cs" />
     <Compile Include="KeyboardInfo.cs" />
     <Compile Include="KeyLogger.cs" />
-    <Compile Include="LedController.cs" />
+    <Compile Include="Controllers\LedController.cs" />
     <Compile Include="LogitechGSDK.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -172,9 +174,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
