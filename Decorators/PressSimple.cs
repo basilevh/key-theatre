@@ -26,7 +26,7 @@ namespace KeyDecorator.Decorators
             const int fadeIn = 100;
             const int stay = 100;
             const int fadeOut = 3800;
-            ledCont.LitKey(key, clr, new Envelope(0, fadeIn, stay, fadeOut));
+            ledCont.LightKey(key, clr, new Envelope(0, fadeIn, stay, fadeOut));
         }
 
         protected override void OnKeyUp(MyKey key)

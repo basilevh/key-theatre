@@ -46,7 +46,7 @@ namespace KeyDecorator.Decorators
                     const int stayH = 700;
                     const int fadeOutH = 500;
                     ledCont.ClearActions(key);
-                    ledCont.LitKey(key, clr, new Envelope(0, fadeInH, stayH, fadeOutH));
+                    ledCont.LightKey(key, clr, new Envelope(0, fadeInH, stayH, fadeOutH));
 
                     // Loop over y values
                     foreach (int y in keyPos.Select(p => p.Item2))
@@ -83,14 +83,14 @@ namespace KeyDecorator.Decorators
                             {
                                 MyKey leftKey = KeyboardInfo.KeyMatrix[y, leftX];
                                 if (leftKey != 0)
-                                    ledCont.LitKey(leftKey, clr,
+                                    ledCont.LightKey(leftKey, clr,
                                         new Envelope(delay, fadeInH, stayH, fadeOutH));
                             }
                             if (rightLit)
                             {
                                 MyKey rightKey = KeyboardInfo.KeyMatrix[y, rightX];
                                 if (rightKey != 0)
-                                    ledCont.LitKey(rightKey, clr,
+                                    ledCont.LightKey(rightKey, clr,
                                         new Envelope(delay, fadeInH, stayH, fadeOutH));
                             }
                         }
@@ -104,7 +104,7 @@ namespace KeyDecorator.Decorators
                     const int fadeOutC = 850;
                     const int delayC = 50;
                     ledCont.ClearActions(key);
-                    ledCont.LitKey(key, clr, new Envelope(0, fadeInC, stayC, fadeOutC));
+                    ledCont.LightKey(key, clr, new Envelope(0, fadeInC, stayC, fadeOutC));
 
                     // TODO account for radius
 
@@ -127,7 +127,7 @@ namespace KeyDecorator.Decorators
                                 if (leftKey != 0)
                                 {
                                     Color leftClr = clr.WithHue(h => h + random.Next(-30, 31));
-                                    ledCont.LitKey(leftKey, leftClr,
+                                    ledCont.LightKey(leftKey, leftClr,
                                         new Envelope(delayC, fadeInC, stayC, fadeOutC));
                                 }
                             }
@@ -137,7 +137,7 @@ namespace KeyDecorator.Decorators
                                 if (rightKey != 0)
                                 {
                                     Color rightClr = clr.WithHue(h => h + random.Next(-30, 31));
-                                    ledCont.LitKey(rightKey, rightClr,
+                                    ledCont.LightKey(rightKey, rightClr,
                                         new Envelope(delayC, fadeInC, stayC, fadeOutC));
                                 }
                             }
@@ -152,7 +152,7 @@ namespace KeyDecorator.Decorators
                                 if (upKey != 0)
                                 {
                                     Color upClr = clr.WithHue(h => h + random.Next(-30, 31));
-                                    ledCont.LitKey(upKey, upClr,
+                                    ledCont.LightKey(upKey, upClr,
                                         new Envelope(delayC, fadeInC, stayC, fadeOutC));
                                 }
                             }
@@ -162,7 +162,7 @@ namespace KeyDecorator.Decorators
                                 if (downKey != 0)
                                 {
                                     Color downClr = clr.WithHue(h => h + random.Next(-30, 31));
-                                    ledCont.LitKey(downKey, downClr,
+                                    ledCont.LightKey(downKey, downClr,
                                         new Envelope(delayC, fadeInC, stayC, fadeOutC));
                                 }
                             }
