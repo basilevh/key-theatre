@@ -16,6 +16,6 @@ Used packages:
 
 Screenshot:
 
-![Screenshot](https://i.imgur.com/3pjg0m5.png)
+![Screenshot](https://i.imgur.com/Ahx8nXB.png)
 
 (Picture of keyboard coming soon)
