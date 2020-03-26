@@ -14,6 +14,6 @@ bin/x86/*
 bin/x64/Release/*
 bin/x86/Release/*
 !bin/x64/Release/KeyDecorator.exe
-!bin/x64/Release/LogitechLedEnginesWrapper.dll
+!bin/x64/Release/*.dll
 !bin/x86/Release/KeyDecorator.exe
-!bin/x86/Release/LogitechLedEnginesWrapper.dll
+!bin/x86/Release/*.dll
